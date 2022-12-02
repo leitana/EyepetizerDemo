@@ -1,0 +1,43 @@
+import com.lx.eyepetizerdemo.buildsrc.*
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.lx.eyepetizerdemo'
+    compileSdk Versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.lx.eyepetizerdemo"
+        minSdk Versions.minSdk
+        targetSdk Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+dependencies {
+    if (Plugins.isAppMode) {
+        implementation project(':eye_login')
+    } else {
+        implementation project(':lib_base')
+    }
+}

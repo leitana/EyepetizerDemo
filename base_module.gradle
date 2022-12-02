@@ -1,0 +1,63 @@
+//plugins {
+//    id("org.jetbrains.kotlin.android")
+//    id("kotlin-kapt")
+//}
+import com.lx.eyepetizerdemo.buildsrc.*
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+if (Plugins.isAppMode) {
+    apply plugin: 'com.android.library'
+
+} else {
+    apply plugin: 'com.android.application'
+}
+
+android {
+    compileSdk = Versions.compileSdk
+
+    defaultConfig {
+        minSdk = Versions.minSdk
+        targetSdk = Versions.targetSdk
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        release {
+//            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.name)
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(path: ':lib_common')
+
+    testImplementation(Libs.AndroidX.junit)
+    androidTestImplementation(Libs.AndroidX.ext_junit)
+    androidTestImplementation(Libs.AndroidX.espresso_core)
+
+    kapt(Libs.arouter_compiler)
+}

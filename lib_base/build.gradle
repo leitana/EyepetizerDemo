@@ -1,0 +1,52 @@
+//plugins {
+//    id("com.android.library")
+//    id("org.jetbrains.kotlin.android")
+//    id("kotlin-kapt")
+//}
+apply from: '../base_lib.gradle'
+import com.lx.eyepetizerdemo.buildsrc.*
+
+android {
+    namespace = "com.lx.lib_base"
+    resourcePrefix "base_"
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    api(Libs.AndroidX.coreKtx)
+    api(Libs.AndroidX.appcompat)
+    api(Libs.AndroidX.annotation)
+    api(Libs.material)
+    testImplementation(Libs.AndroidX.junit)
+    androidTestImplementation(Libs.AndroidX.ext_junit)
+    androidTestImplementation(Libs.AndroidX.espresso_core)
+
+    api(Libs.AndroidX.multidex)
+    api(Libs.AndroidX.startup)
+
+    api(Libs.AndroidX.livedata)
+    api(Libs.AndroidX.viewmodel)
+
+    api(Libs.AndroidX.constraintlayout)
+
+
+    //retrofit okhttp
+    api(Libs.retrofit)
+    api(Libs.convertGson)
+    api(Libs.converterMoshi)
+    api(Libs.okhttp)
+    api(Libs.loggingInterceptor)
+
+    api(Libs.utilcodex)
+
+    api(Libs.glide)
+    annotationProcessor(Libs.glide_compiler)
+
+    api(Libs.logger)
+
+    api(Libs.arouter)
+
+}

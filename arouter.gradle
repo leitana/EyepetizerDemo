@@ -1,0 +1,13 @@
+//ARouter配置
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation(Libs.arouter)
+    kapt(Libs.arouter_compiler)
+}

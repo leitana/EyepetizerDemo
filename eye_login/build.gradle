@@ -1,0 +1,26 @@
+import com.lx.eyepetizerdemo.buildsrc.*
+apply from: '../base_module.gradle'
+android {
+    namespace = "com.lx.eye_login"
+    resourcePrefix = "login_"
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+
+    sourceSets {
+        main {
+            if (Plugins.isAppMode.toBoolean()) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+}
+
+dependencies {
+    api project(path: ':lib_common')
+}

@@ -1,0 +1,15 @@
+apply from: '../base_lib.gradle'
+
+import com.lx.eyepetizerdemo.buildsrc.*
+
+android {
+    namespace = "com.lx.common"
+    resourcePrefix = "common_"
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    api project(path: ':lib_base')
+}
