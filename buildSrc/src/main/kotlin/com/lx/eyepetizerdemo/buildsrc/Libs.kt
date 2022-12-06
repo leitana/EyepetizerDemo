@@ -32,6 +32,12 @@ object Libs {
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
     }
 
+    object Hilt {
+        private const val hilt_version = "2.44"
+        const val hilt_android = "com.google.dagger:hilt-android:${hilt_version}"
+        const val hilt_compiler = "com.google.dagger:hilt-android-compiler:${hilt_version}"
+    }
+
     const val material = "com.google.android.material:material:${Versions.MATERIAL}"
 
     const val gson = "com.google.code.gson:gson:2.8.7"

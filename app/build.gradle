@@ -2,6 +2,7 @@ import com.lx.eyepetizerdemo.buildsrc.*
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
 }
 
@@ -40,4 +41,6 @@ dependencies {
     } else {
         implementation project(':lib_base')
     }
+    implementation(Libs.Hilt.hilt_android)
+    kapt(Libs.Hilt.hilt_compiler)
 }

@@ -7,6 +7,7 @@ import com.lx.eyepetizerdemo.buildsrc.*
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.android.library'
+
 android {
     compileSdk = Versions.compileSdk
 

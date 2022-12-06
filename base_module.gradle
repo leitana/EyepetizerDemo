@@ -5,9 +5,9 @@
 import com.lx.eyepetizerdemo.buildsrc.*
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.dagger.hilt.android'
 if (Plugins.isAppMode) {
     apply plugin: 'com.android.library'
-
 } else {
     apply plugin: 'com.android.application'
 }
@@ -60,4 +60,7 @@ dependencies {
     androidTestImplementation(Libs.AndroidX.espresso_core)
 
     kapt(Libs.arouter_compiler)
+
+    api(Libs.Hilt.hilt_android)
+    kapt(Libs.Hilt.hilt_compiler)
 }
