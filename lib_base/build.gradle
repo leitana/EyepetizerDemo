@@ -49,4 +49,7 @@ dependencies {
 
     api(Libs.arouter)
 
+    api(Libs.coroutines_core)
+    api(Libs.coroutines_android)
+
 }

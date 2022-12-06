@@ -68,7 +68,7 @@ object Libs {
     const val arouter_compiler = "com.alibaba:arouter-compiler:$arouter_version"
 
     //协程
-    private const val Coroutinesversion = "1.6.0"
-    const val Coroutinescore ="org.jetbrains.kotlinx:kotlinx-coroutines-core:$Coroutinesversion"
-    const val Coroutinesandroid ="org.jetbrains.kotlinx:kotlinx-coroutines-android:$Coroutinesversion"
+    private const val coroutines_version = "1.6.4"
+    const val coroutines_core ="org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    const val coroutines_android ="org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }
