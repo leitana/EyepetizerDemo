@@ -8,7 +8,7 @@ import com.lx.eyepetizerdemo.buildsrc.*
 
 android {
     namespace = "com.lx.lib_base"
-    resourcePrefix "base_"
+//    resourcePrefix "base_"
     buildFeatures {
         viewBinding = true
     }
@@ -29,6 +29,8 @@ dependencies {
 
     api(Libs.AndroidX.livedata)
     api(Libs.AndroidX.viewmodel)
+    api(Libs.AndroidX.activityKtx)
+    api(Libs.AndroidX.fragmentKtx)
 
     api(Libs.AndroidX.constraintlayout)
 
@@ -52,4 +54,5 @@ dependencies {
     api(Libs.coroutines_core)
     api(Libs.coroutines_android)
 
+    api(Libs.toasty)
 }

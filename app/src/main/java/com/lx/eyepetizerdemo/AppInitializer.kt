@@ -1,7 +1,9 @@
 package com.lx.eyepetizerdemo
 
+import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
+import com.alibaba.android.arouter.launcher.ARouter
 
 /**
  * @title：AppInitializer
@@ -12,7 +14,11 @@ import androidx.startup.Initializer
  */
 class AppInitializer: Initializer<Unit> {
     override fun create(context: Context) {
-        TODO("Not yet implemented")
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(context.applicationContext as Application)
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf()

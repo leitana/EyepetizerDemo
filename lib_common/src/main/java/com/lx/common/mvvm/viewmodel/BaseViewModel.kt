@@ -27,7 +27,7 @@ object LoadingState: ViewState()
 abstract class BaseViewModel :ViewModel(){
     val uiState = MutableLiveData<ViewState>()
 
-    fun <T> liveDataEx(block: suspend() -> T) = liveData<T>{
+    fun <T> liveDataEx(block: suspend() -> T) = liveData{
         kotlin.runCatching {
             uiState.value = LoadingState
             block()

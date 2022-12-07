@@ -13,6 +13,19 @@
         android:theme="@style/Theme.EyepetizerDemo"
         tools:targetApi="32"
         tools:replace="android:appComponentFactory"
-        android:appComponentFactory="factory"/>
-
+        android:appComponentFactory="factory">
+        
+        <provider
+            android:authorities="${applicationId}.androidx-startup"
+            android:name="androidx.startup.InitializationProvider"
+            android:exported="false"
+            tools:node="merge">
+            <!-- 自动初始化 -->
+            <meta-data
+                android:name="com.lx.eyepetizerdemo.AppInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+    
+    
 </manifest>
