@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 //    kapt {
 //        arguments {
 //            arg("AROUTER_MODULE_NAME", project.getName())

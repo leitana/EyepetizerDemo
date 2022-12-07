@@ -77,4 +77,7 @@ object Libs {
     private const val coroutines_version = "1.6.4"
     const val coroutines_core ="org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     const val coroutines_android ="org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    //toast
+    const val toasty = "com.github.GrenderG:Toasty:1.5.2"
 }

@@ -33,13 +33,16 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
     if (Plugins.isAppMode) {
         implementation project(':eye_login')
     } else {
-        implementation project(':lib_base')
+        implementation project(':lib_common')
     }
     implementation(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
