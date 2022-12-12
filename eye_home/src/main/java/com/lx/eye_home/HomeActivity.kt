@@ -2,7 +2,7 @@ package com.lx.eye_home
 
 import com.lx.common.mvvm.activity.BaseBindVMActivity
 import com.lx.eye_home.databinding.HomeActivityBinding
-import dagger.hilt.android.AndroidEntryPoint
+import com.lx.lib_base.ext.immersionStatusBar
 
 /**
  * @title：HomeActivity
@@ -11,13 +11,13 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author linxiao
  * @data Created in 2022/12/12
  */
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
     override val getLayoutRes: Int
         get() = R.layout.home_activity
 
     override fun initView() {
-
+        immersionStatusBar(true, android.R.color.white, true, 0.2f)
     }
 
     override fun initData() {

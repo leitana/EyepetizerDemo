@@ -80,4 +80,8 @@ object Libs {
 
     //toast
     const val toasty = "com.github.GrenderG:Toasty:1.5.2"
+
+    private const val immersionbar_version = "3.2.2"
+    const val immersionbar = "com.geyifeng.immersionbar:immersionbar:$immersionbar_version"
+    const val immersionbar_ktx = "com.geyifeng.immersionbar:immersionbar-ktx:$immersionbar_version"
 }

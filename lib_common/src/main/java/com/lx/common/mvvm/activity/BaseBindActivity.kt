@@ -17,8 +17,8 @@ abstract class BaseBindActivity<DB: ViewDataBinding>: AppCompatActivity() {
     abstract val getLayoutRes: Int
     lateinit var mBinding: DB
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, getLayoutRes)
     }
     open fun initData() {

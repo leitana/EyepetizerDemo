@@ -16,6 +16,7 @@
 
         <activity
             android:name=".SplashAcitivty"
+            android:theme="@style/Theme.EyepetizerDemo.Launch"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -23,8 +23,9 @@ abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
     abstract val getLayoutRes: Int
     lateinit var viewModel: VM
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setLayout()
         initView()
         initViewModel()
         initData()

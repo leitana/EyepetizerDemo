@@ -55,4 +55,7 @@ dependencies {
     api(Libs.coroutines_android)
 
     api(Libs.toasty)
+
+    api(Libs.immersionbar)
+    api(Libs.immersionbar_ktx)
 }

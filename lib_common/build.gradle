@@ -6,7 +6,8 @@ android {
     namespace = "com.lx.common"
     resourcePrefix = "common_"
     buildFeatures {
-        viewBinding = true
+//        viewBinding = true
+        dataBinding = true
     }
 }
 
