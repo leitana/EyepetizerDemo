@@ -39,8 +39,10 @@ android {
 }
 
 dependencies {
-    if (Plugins.isAppMode) {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    if (Plugins.isAppMode.toBoolean()) {
         implementation project(':eye_login')
+        implementation project(':eye_home')
     } else {
         implementation project(':lib_common')
     }

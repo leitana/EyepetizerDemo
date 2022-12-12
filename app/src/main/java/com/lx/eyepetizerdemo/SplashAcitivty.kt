@@ -2,7 +2,9 @@ package com.lx.eyepetizerdemo
 
 import androidx.lifecycle.lifecycleScope
 import com.lx.common.mvvm.activity.BaseBindActivity
+import com.lx.eye_home.HomeActivity
 import com.lx.eyepetizerdemo.databinding.ActivitySplashBinding
+import com.lx.lib_base.ext.startActivity
 import kotlinx.coroutines.delay
 
 /**
@@ -19,6 +21,7 @@ class SplashAcitivty: BaseBindActivity<ActivitySplashBinding>() {
     override fun initData() {
         lifecycleScope.launchWhenCreated {
             delay(500)
+            startActivity<HomeActivity>()
             finish()
         }
     }

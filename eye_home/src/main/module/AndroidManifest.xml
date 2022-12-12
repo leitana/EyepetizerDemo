@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lx.eye_login">
+    package="com.lx.eye_home">
 
     <application>
-        <activity android:name="com.lx.eye_login.ui.login.LoginActivity"/>
+        <activity android:name=".HomeActivity"/>
     </application>
 </manifest>

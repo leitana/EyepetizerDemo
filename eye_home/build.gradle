@@ -1,8 +1,8 @@
 import com.lx.eyepetizerdemo.buildsrc.*
 apply from: '../base_module.gradle'
 android {
-    namespace = "com.lx.eye_login"
-    resourcePrefix = "login_"
+    namespace = "com.lx.eye_home"
+    resourcePrefix = "home_"
 //    kotlinOptions {
 //        jvmTarget = "1.8"
 //    }
