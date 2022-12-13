@@ -19,7 +19,7 @@ fun Activity.immersionStatusBar(
     immersionBar {
         fitsSystemWindows(fits)
         statusBarColor(statusBarColor)
-        statusBarDarkFont(isDarkFont, statusAlpha)
+//        statusBarDarkFont(isDarkFont, statusAlpha)
     }
 }
 

@@ -1,6 +1,8 @@
 package com.lx.eyepetizerdemo
 
+import android.content.Intent
 import androidx.lifecycle.lifecycleScope
+import com.gyf.immersionbar.ktx.immersionBar
 import com.lx.common.mvvm.activity.BaseBindActivity
 import com.lx.eye_home.HomeActivity
 import com.lx.eyepetizerdemo.databinding.ActivitySplashBinding
@@ -19,6 +21,10 @@ class SplashAcitivty: BaseBindActivity<ActivitySplashBinding>() {
         get() = R.layout.activity_splash
 
     override fun initData() {
+        immersionBar {
+            statusBarColor(com.lx.eye_home.R.color.home_white)
+            navigationBarColor(com.lx.eye_home.R.color.home_white)
+        }
         lifecycleScope.launchWhenCreated {
             delay(500)
             startActivity<HomeActivity>()
