@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/home_launch_screen">
+        android:background="@mipmap/launch_screen">
 
         <TextView
             android:id="@+id/text"

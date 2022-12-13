@@ -22,8 +22,8 @@ class SplashAcitivty: BaseBindActivity<ActivitySplashBinding>() {
 
     override fun initData() {
         immersionBar {
-            statusBarColor(com.lx.eye_home.R.color.home_white)
-            navigationBarColor(com.lx.eye_home.R.color.home_white)
+            statusBarColor(R.color.white)
+            navigationBarColor(R.color.white)
         }
         lifecycleScope.launchWhenCreated {
             delay(500)

@@ -15,6 +15,13 @@ android {
         main {
             if (Plugins.isAppMode.toBoolean()) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                //集成开发模式下排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                }
+                kotlin {
+                    exclude 'debug/**'
+                }
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
