@@ -1,14 +1,13 @@
 package com.lx.common.net
 
-import android.util.Log
 import com.lx.common.BuildConfig
 import com.lx.common.Constants
 import com.lx.common.di.EyeQualifier
 import com.lx.common.di.WanQualifier
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,9 +33,17 @@ annotation class WanOkHttpClient
 @Retention(AnnotationRetention.BINARY)
 annotation class EyeOkHttpClient
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class WanUrlQualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class EyeUrlQualifier
+
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
 
     @Singleton
     @Provides
@@ -80,23 +87,47 @@ class NetworkModule {
             .build()
     }
 
+//    @WanUrlQualifier
+//    @Singleton
+//    @Provides
+//    fun provideWanRetrofit(@WanOkHttpClient okHttpClient: OkHttpClient): Retrofit{
+//        return Retrofit.Builder()
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .baseUrl(Constants.WAN_URL)
+//            .client(okHttpClient)
+//            .build()
+//    }
+//
+//
+//    @EyeUrlQualifier
+//    @Singleton
+//    @Provides
+//    fun provideEyeRetrofit(@EyeOkHttpClient okHttpClient: OkHttpClient): Retrofit{
+//        return Retrofit.Builder()
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .baseUrl(Constants.EYE_URL)
+//            .client(okHttpClient)
+//            .build()
+//    }
+
+    @WanUrlQualifier
     @Singleton
     @Provides
-    fun provideWanRetrofit(@WanOkHttpClient okHttpClient: OkHttpClient): Retrofit{
+    fun provideWanRetrofit(@WanQualifier url: String, @WanOkHttpClient okHttpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Constants.WAN_URL)
+            .baseUrl(url)
             .client(okHttpClient)
             .build()
     }
 
-
+    @EyeUrlQualifier
     @Singleton
     @Provides
-    fun provideEyeRetrofit(@EyeOkHttpClient okHttpClient: OkHttpClient): Retrofit{
+    fun provideEyeRetrofit(@EyeQualifier url: String, @WanOkHttpClient okHttpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Constants.EYE_URL)
+            .baseUrl(url)
             .client(okHttpClient)
             .build()
     }

@@ -7,6 +7,7 @@ import com.lx.common.di.EyeQualifier
 import com.lx.common.di.WanQualifier
 import com.lx.common.mvvm.activity.BaseBindVMActivity
 import com.lx.common.net.WanOkHttpClient
+import com.lx.common.net.WanUrlQualifier
 import com.lx.eye_home.databinding.HomeActivityBinding
 import com.lx.lib_base.ext.immersionStatusBar
 import com.lx.lib_base.ext.toastInfo
@@ -24,15 +25,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
 
-//    @WanOkHttpClient
-//    @WanQualifier
-    @WanOkHttpClient
     @Inject
     lateinit var homeApi: HomeApi
-
-//    @WanQualifier
-//    @Inject
-//    lateinit var retrofit: Retrofit
 
     override val getLayoutRes: Int
         get() = R.layout.home_activity
@@ -48,7 +42,7 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
 
     override fun initData() {
         lifecycleScope.launchWhenCreated {
-            val str = homeApi.getTopArticles().apiData().get(0).publishTime
+            val str = homeApi.getTopArticles().apiData().get(0).author
             toastInfo(str.toString())
         }
     }

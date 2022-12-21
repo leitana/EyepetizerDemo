@@ -2,6 +2,7 @@ package com.lx.eye_home.di
 
 import com.lx.common.di.WanQualifier
 import com.lx.common.net.WanOkHttpClient
+import com.lx.common.net.WanUrlQualifier
 import com.lx.eye_home.HomeApi
 import dagger.Module
 import dagger.Provides
@@ -23,9 +24,7 @@ object ApiMudule {
 
     @Singleton
     @Provides
-//    @WanOkHttpClient
-//    @WanQualifier
-    fun provideTopArticle(retrofit: Retrofit): HomeApi{
+    fun provideTopArticle(@WanUrlQualifier retrofit: Retrofit): HomeApi{
         return retrofit.create(HomeApi::class.java)
     }
 }
