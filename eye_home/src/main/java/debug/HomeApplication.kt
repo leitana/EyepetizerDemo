@@ -10,6 +10,6 @@ import dagger.hilt.android.HiltAndroidApp
  * @author linxiao
  * @data Created in 2022/12/13
  */
-@HiltAndroidApp
+//@HiltAndroidApp
 class HomeApplication: BaseApplication() {
 }

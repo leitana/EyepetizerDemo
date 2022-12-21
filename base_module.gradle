@@ -63,4 +63,7 @@ dependencies {
 
     api(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
+
+    implementation(Libs.AndroidX.paging_runtime)
+    testImplementation(Libs.AndroidX.paging_test)
 }

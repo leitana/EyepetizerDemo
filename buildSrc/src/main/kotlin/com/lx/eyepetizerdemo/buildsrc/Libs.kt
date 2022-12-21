@@ -30,6 +30,10 @@ object Libs {
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+
+        private const val paging_version = "3.1.1"
+        const val paging_runtime = "androidx.paging:paging-runtime:$paging_version"
+        const val paging_test = "androidx.paging:paging-common:$paging_version"
     }
 
     object Hilt {
