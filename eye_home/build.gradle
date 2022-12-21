@@ -14,15 +14,18 @@ android {
     sourceSets {
         main {
             if (Plugins.isAppMode.toBoolean()) {
+                //集成模式
                 //集成开发模式下排除debug文件夹中的所有Java文件
-                java {
-                    exclude 'debug/**'
-                }
+//                java {
+//                    exclude 'debug/**'
+//                }
+//                kotlin { exclude '**/HomeApplication.kt' }
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
                 kotlin {
                     exclude 'debug/**'
                 }
-                manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
+                //单App模式
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }
