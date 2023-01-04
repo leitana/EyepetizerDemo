@@ -1,40 +1,25 @@
-package com.lx.common.mvvm.activity
+package com.lx.common.mvvm.fragment
 
-import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import com.lx.common.mvvm.viewmodel.BaseViewModel
-import com.lx.common.mvvm.viewmodel.ErrorState
-import com.lx.common.mvvm.viewmodel.LoadingState
-import com.lx.common.mvvm.viewmodel.SucessState
+import com.lx.common.mvvm.viewmodel.*
 import com.lx.lib_base.ext.toastError
 import com.orhanobut.logger.Logger
 import java.lang.reflect.ParameterizedType
 
 /**
- * @title：BaseVMActivity
+ * @title：BaseVMFragment
  * @projectName EyepetizerDemo
  * @description: <Description>
  * @author linxiao
- * @data Created in 2022/12/07
+ * @data Created in 2022/12/22
  */
-abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
-    abstract val getLayoutRes: Int
+abstract class BaseVMFragment<VM: BaseViewModel>: BaseFragment() {
     lateinit var viewModel: VM
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setLayout()
-        initView()
+    override fun initData() {
         initViewModel()
-        initData()
-        startObserve()
-    }
-
-    open fun setLayout() {
-        setContentView(getLayoutRes)
+        lazyLoadData()
     }
 
     private fun initViewModel(){
@@ -63,11 +48,12 @@ abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
     }
 
     protected fun <T : Any> LiveData<T>.observerKt(block: (T) -> Unit){
-        this.observe(this@BaseVMActivity){
+        this.observe(viewLifecycleOwner){
             block(it)
         }
     }
 
+    //由于每个页面的加载框可能不一致，所以此处暴露给子类实现
     open fun showLoading() {
 
     }
@@ -80,11 +66,5 @@ abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
 
     }
 
-    open fun initWindow() {
-
-    }
-
-    abstract fun initView()
-    abstract fun initData()
-    abstract fun startObserve()
+    abstract fun lazyLoadData()
 }

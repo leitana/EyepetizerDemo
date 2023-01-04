@@ -17,4 +17,6 @@ dependencies {
     api project(path: ':lib_base')
     api(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
+    api(Libs.AndroidX.paging_runtime)
+    api(Libs.AndroidX.paging_test)
 }

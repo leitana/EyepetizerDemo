@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/eye_home" />
             <option value="$PROJECT_DIR$/eye_login" />
+            <option value="$PROJECT_DIR$/eye_wan" />
             <option value="$PROJECT_DIR$/lib_base" />
             <option value="$PROJECT_DIR$/lib_common" />
           </set>
