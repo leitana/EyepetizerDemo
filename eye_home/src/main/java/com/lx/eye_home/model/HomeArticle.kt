@@ -1,4 +1,4 @@
-package com.lx.eye_home
+package com.lx.eye_home.model
 
 /**
  * 首页文章

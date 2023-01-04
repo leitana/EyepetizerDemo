@@ -1,5 +1,6 @@
 package com.lx.eye_home
 
+import com.lx.eye_home.model.HomeArticle
 import retrofit2.http.GET
 
 /**
