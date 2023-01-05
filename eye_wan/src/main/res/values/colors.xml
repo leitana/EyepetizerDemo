@@ -7,4 +7,25 @@
     <color name="wan_teal_700">#FF018786</color>
     <color name="wan_black">#FF000000</color>
     <color name="wan_white">#FFFFFFFF</color>
+
+    <color name="wan_viewBackground">@color/white</color>
+
+    <!-- item -->
+    <color name="wan_common_color">#19191B</color>
+    <color name="wan_item_title">#19191B</color>
+    <color name="wan_item_author">@color/gray8</color>
+    <color name="wan_item_desc">@color/gray7</color>
+    <color name="wan_item_time">@color/gray7</color>
+    <color name="wan_item_date">@color/gray7</color>
+    <color name="wan_item_chapter">@color/gray7</color>
+    <color name="wan_item_tag_tv">#ffFFFFFF</color>
+    <color name="wan_item_nav_color_tv">#19191B</color>
+    <color name="wan_color_title_bg">#CCFFFFFF</color>
+    <color name="wan_color_about_tv">@color/gray7</color>
+    <color name="wan_transparent_75">#ba000000</color>
+    <color name="wan_vertical_tab_layout_bg">@color/gray2</color>
+    <color name="wan_vertical_tab_layout_indicator_color">@color/white</color>
+    <color name="wan_item_flow_layout_bg">@color/gray3</color>
+    <color name="wan_arrow_color">@color/gray8</color>
+    <color name="wan_sticky_header_bg">@color/gray2</color>
 </resources>

@@ -1,3 +1,8 @@
 <resources>
     <string name="wan_app_name">eye_wan</string>
+
+    <string name="wan_collect_success">收藏成功</string>
+    <string name="wan_cancel_collect_success">已取消收藏</string>
+    <string name="wan_new_fresh">新</string>
+    <string name="wan_top_tip">置顶</string>
 </resources>

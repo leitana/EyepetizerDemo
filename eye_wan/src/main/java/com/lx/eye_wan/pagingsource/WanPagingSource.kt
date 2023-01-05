@@ -14,11 +14,11 @@ class WanPagingSource @Inject constructor(private val homeApi: HomeApi): PagingS
         return try {
             val page = params.key ?: 1
             val pageSize = params.loadSize
-            val dataList = homeApi.getTopArticles()
-            val repoItems = dataList.apiData()
+            val dataList = homeApi.getArticles(page).apiData()
+            val repoItems = dataList.datas
             val prevKey = if (page > 1) page - 1 else null
-            val nextKey = if (repoItems.isNotEmpty()) page + 1 else null
-            LoadResult.Page(repoItems, prevKey, nextKey)
+            val nextKey = if (!repoItems.isNullOrEmpty()) page + 1 else null
+            LoadResult.Page(repoItems!!, prevKey, nextKey)
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
