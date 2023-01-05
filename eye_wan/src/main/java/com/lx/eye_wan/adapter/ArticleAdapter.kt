@@ -1,5 +1,6 @@
 package com.lx.eye_wan.adapter
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -22,14 +23,15 @@ class ArticleAdapter: PagingDataAdapter<HomeArticle.DatasBean, ArticleAdapter.Vi
                 oldItem: HomeArticle.DatasBean,
                 newItem: HomeArticle.DatasBean
             ): Boolean {
-                TODO("Not yet implemented")
+                return oldItem.id == newItem.id
             }
 
+            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
                 oldItem: HomeArticle.DatasBean,
                 newItem: HomeArticle.DatasBean
             ): Boolean {
-                TODO("Not yet implemented")
+                return oldItem == newItem
             }
 
         }

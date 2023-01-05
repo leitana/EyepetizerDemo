@@ -43,6 +43,7 @@ dependencies {
     if (Plugins.isAppMode.toBoolean()) {
         implementation project(':eye_login')
         implementation project(':eye_home')
+        implementation project(':eye_wan')
     } else {
         implementation project(':lib_common')
     }
