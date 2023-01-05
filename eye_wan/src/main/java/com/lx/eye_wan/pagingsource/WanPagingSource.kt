@@ -1,10 +1,10 @@
-package com.lx.eye_home.pagingsource
+package com.lx.eye_wan.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.lx.eye_home.HomeApi
-import com.lx.eye_home.apiData
-import com.lx.eye_home.model.HomeArticle
+import com.lx.eye_wan.bean.HomeArticle
+import com.lx.eye_wan.net.HomeApi
+import com.lx.eye_wan.net.apiData
 import javax.inject.Inject
 
 class WanPagingSource @Inject constructor(private val homeApi: HomeApi): PagingSource<Int, HomeArticle.DatasBean>() {
