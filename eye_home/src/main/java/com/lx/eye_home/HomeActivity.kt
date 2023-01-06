@@ -47,9 +47,12 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
     }
 
     override fun initData() {
-        lifecycleScope.launchWhenCreated {
-            val str = homeApi.getTopArticles().apiData().get(0).author
-            toastInfo(str.toString())
+//        lifecycleScope.launchWhenCreated {
+//            val str = homeApi.getTopArticles().apiData().get(0).author
+//            toastInfo(str.toString())
+//        }
+        viewModel.getSelect().observe(this){ index ->
+            switchFragment(index)
         }
     }
 
