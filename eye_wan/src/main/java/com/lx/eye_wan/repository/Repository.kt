@@ -16,6 +16,7 @@ import javax.inject.Inject
  * @author linxiao
  * @data Created in 2023/01/05
  */
+
 object Repository {
     private const val PAGE_SIZE = 50
     @Inject

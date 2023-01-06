@@ -1,6 +1,7 @@
 package com.lx.eye_home
 
 import com.lx.common.mvvm.viewmodel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 /**
  * @title：HomeViewModel
@@ -9,6 +10,7 @@ import com.lx.common.mvvm.viewmodel.BaseViewModel
  * @author linxiao
  * @data Created in 2022/12/12
  */
+@HiltViewModel
 class HomeViewModel: BaseViewModel() {
-
+    private val HOME_PAGE_INDEX = "home_page_index"
 }

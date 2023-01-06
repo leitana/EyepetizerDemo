@@ -1,5 +1,11 @@
 package com.lx.common.mvvm.fragment
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.lx.common.mvvm.viewmodel.*
@@ -14,8 +20,24 @@ import java.lang.reflect.ParameterizedType
  * @author linxiao
  * @data Created in 2022/12/22
  */
-abstract class BaseVMFragment<VM: BaseViewModel>: BaseFragment() {
+abstract class BaseVMFragment<DB: ViewDataBinding, VM: BaseViewModel>: BaseFragment() {
+    lateinit var binding: DB
     lateinit var viewModel: VM
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            getLayoutRes,
+            container,
+            false
+        )
+        binding.lifecycleOwner = this
+        return binding.root
+    }
 
     override fun initData() {
         initViewModel()

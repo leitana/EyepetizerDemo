@@ -1,13 +1,17 @@
 package com.lx.eye_home
 
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lx.common.di.EyeQualifier
 import com.lx.common.di.WanQualifier
 import com.lx.common.mvvm.activity.BaseBindVMActivity
 import com.lx.common.net.WanOkHttpClient
 import com.lx.common.net.WanUrlQualifier
+import com.lx.common.router.RouterPath
 import com.lx.eye_home.databinding.HomeActivityBinding
 import com.lx.lib_base.ext.immersionStatusBar
 import com.lx.lib_base.ext.toastInfo
@@ -24,6 +28,8 @@ import javax.inject.Inject
  */
 @AndroidEntryPoint
 class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
+
+    private var mWanAndroidFragment: Fragment? = null
 
     @Inject
     lateinit var homeApi: HomeApi
@@ -48,5 +54,24 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
     }
 
     override fun startObserve() {
+    }
+
+    private fun switchFragment(position: Int){
+        val transaction = supportFragmentManager.beginTransaction()
+        hideFragments(transaction)
+        when(position) {
+            0 -> mWanAndroidFragment?.let {
+                transaction.show(it)
+            } ?: (ARouter.getInstance().build(RouterPath.Wan.PATH_WAN_FRAGMENT)
+                .navigation() as Fragment).let {
+                    mWanAndroidFragment = it
+                transaction.add(R.id.mContentFL, it, RouterPath.Wan.PATH_WAN_FRAGMENT)
+            }
+        }
+        transaction.commitNowAllowingStateLoss()
+    }
+
+    private fun hideFragments(transaction: FragmentTransaction){
+        mWanAndroidFragment?.let { transaction.hide(it) }
     }
 }

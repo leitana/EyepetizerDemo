@@ -1,6 +1,14 @@
 package com.lx.eye_wan
 
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.lx.common.mvvm.fragment.BaseVMFragment
+import com.lx.common.router.RouterPath
+import com.lx.eye_wan.adapter.ArticleAdapter
+import com.lx.eye_wan.databinding.WanActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * @title：WanFragment
@@ -9,15 +17,27 @@ import com.lx.common.mvvm.fragment.BaseVMFragment
  * @author linxiao
  * @data Created in 2022/12/22
  */
-class WanFragment: BaseVMFragment<WanViewModel>() {
+@AndroidEntryPoint
+@Route(path = RouterPath.Wan.PATH_WAN_FRAGMENT)
+class WanFragment: BaseVMFragment<WanActivityMainBinding, WanViewModel>() {
+
+    private val mAdapter : ArticleAdapter by lazy { ArticleAdapter() }
+
     override val getLayoutRes: Int
-        get() = TODO("Not yet implemented")
+        get() = R.layout.wan_activity_main
 
     override fun initView() {
-        TODO("Not yet implemented")
+        binding.run {
+            recyclerview.layoutManager = LinearLayoutManager(context)
+            recyclerview.adapter = mAdapter
+        }
     }
 
     override fun lazyLoadData() {
-        TODO("Not yet implemented")
+        lifecycleScope.launch {
+            viewModel.getArticalData().collect { pagingData ->
+                mAdapter.submitData(pagingData)
+            }
+        }
     }
 }

@@ -1,13 +1,16 @@
 package com.lx.eye_wan.adapter
 
 import android.annotation.SuppressLint
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.lx.eye_wan.R
 import com.lx.eye_wan.bean.HomeArticle
+import com.lx.eye_wan.databinding.WanItemMainListBinding
 
 /**
  * @title：ArticleAdapter
@@ -36,15 +39,18 @@ class ArticleAdapter: PagingDataAdapter<HomeArticle.DatasBean, ArticleAdapter.Vi
 
         }
     }
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view: View = LayoutInflater.from(parent.context)
+            .inflate(R.layout.wan_item_main_list, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val article = getItem(position)
+        holder.binding.viewModel = article
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val binding: WanItemMainListBinding = DataBindingUtil.bind(itemView)!!
     }
 }
