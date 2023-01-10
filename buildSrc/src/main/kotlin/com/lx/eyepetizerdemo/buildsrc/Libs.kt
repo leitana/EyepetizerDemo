@@ -26,8 +26,9 @@ object Libs {
         const val startup = "androidx.startup:startup-runtime:1.1.1"
 
         private const val lifecycle_version = "2.5.1"
-        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+        const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+        const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+        const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 

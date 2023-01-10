@@ -38,13 +38,15 @@ abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
     }
 
     private fun initViewModel(){
-        val parameterizedType = javaClass.genericSuperclass as? ParameterizedType
-        @Suppress("UNCHECKED_CAST")
-        val vmClass = parameterizedType?.actualTypeArguments?.getOrNull(0) as? Class<VM>?
-        if(vmClass != null)
-            viewModel = ViewModelProvider(this).get( vmClass )
-        else
-            Logger.d("BaseVMActivity","could not find VM class for $this")
+//        val parameterizedType = javaClass.genericSuperclass as? ParameterizedType
+//        @Suppress("UNCHECKED_CAST")
+//        val vmClass = parameterizedType?.actualTypeArguments?.getOrNull(0) as? Class<VM>?
+//        if(vmClass != null)
+//            viewModel = ViewModelProvider(this).get( vmClass )
+//        else
+//            Logger.d("BaseVMActivity","could not find VM class for $this")
+        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
+        viewModel = ViewModelProvider(this)[parameterizedType.actualTypeArguments[0] as Class<VM>]
         viewModel.uiState.observe(this){ state ->
             when(state) {
                 LoadingState -> {

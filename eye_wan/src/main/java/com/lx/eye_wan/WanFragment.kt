@@ -7,6 +7,7 @@ import com.lx.common.mvvm.fragment.BaseVMFragment
 import com.lx.common.router.RouterPath
 import com.lx.eye_wan.adapter.ArticleAdapter
 import com.lx.eye_wan.databinding.WanActivityMainBinding
+import com.lx.eye_wan.viewmodel.WanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -35,7 +36,7 @@ class WanFragment: BaseVMFragment<WanActivityMainBinding, WanViewModel>() {
 
     override fun lazyLoadData() {
         lifecycleScope.launch {
-            viewModel.getArticalData().collect { pagingData ->
+            viewModel.getArticleData().collect { pagingData ->
                 mAdapter.submitData(pagingData)
             }
         }

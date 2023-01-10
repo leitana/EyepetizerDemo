@@ -17,8 +17,8 @@ import javax.inject.Inject
  * @data Created in 2023/01/05
  */
 
-object Repository {
-    private const val PAGE_SIZE = 50
+class Repository @Inject constructor() {
+    private val PAGE_SIZE = 50
     @Inject
     lateinit var homeApi: HomeApi
 
