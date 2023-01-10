@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.lx.common.mvvm.viewmodel.*
+import com.lx.lib_base.ext.getVmClazz
 import com.lx.lib_base.ext.toastError
 import com.orhanobut.logger.Logger
 import java.lang.reflect.ParameterizedType
@@ -22,7 +23,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseVMFragment<DB: ViewDataBinding, VM: BaseViewModel>: BaseFragment() {
     lateinit var binding: DB
-    lateinit var viewModel: VM
+    lateinit var mViewModel: VM
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,9 +53,13 @@ abstract class BaseVMFragment<DB: ViewDataBinding, VM: BaseViewModel>: BaseFragm
 //            viewModel = ViewModelProvider(this)[vmClass]
 //        else
 //            Logger.d("BaseVMActivity","could not find VM class for $this")
-        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
-        viewModel = ViewModelProvider(this)[parameterizedType.actualTypeArguments[0] as Class<VM>]
-        viewModel.uiState.observe(this){ state ->
+
+//        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
+//        mViewModel = ViewModelProvider(this)[parameterizedType.actualTypeArguments[0] as Class<VM>]
+
+        mViewModel = createViewModel()
+
+        mViewModel.uiState.observe(this){ state ->
             when(state) {
                 LoadingState -> {
                     showLoading()
@@ -69,6 +74,10 @@ abstract class BaseVMFragment<DB: ViewDataBinding, VM: BaseViewModel>: BaseFragm
                 }
             }
         }
+    }
+
+    private fun createViewModel(): VM{
+        return ViewModelProvider(this).get(getVmClazz(this))
     }
 
     protected fun <T : Any> LiveData<T>.observerKt(block: (T) -> Unit){

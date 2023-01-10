@@ -36,7 +36,7 @@ class WanFragment: BaseVMFragment<WanActivityMainBinding, WanViewModel>() {
 
     override fun lazyLoadData() {
         lifecycleScope.launch {
-            viewModel.getArticleData().collect { pagingData ->
+            mViewModel.getArticleData().collect { pagingData ->
                 mAdapter.submitData(pagingData)
             }
         }

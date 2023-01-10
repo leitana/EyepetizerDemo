@@ -30,6 +30,7 @@ dependencies {
     api(Libs.AndroidX.lifecycle_runtime)
     api(Libs.AndroidX.lifecycle_livedata)
     api(Libs.AndroidX.lifecycle_viewmodel)
+//    api(Libs.AndroidX.lifecycle_extensions)
     api(Libs.AndroidX.activityKtx)
     api(Libs.AndroidX.fragmentKtx)
 

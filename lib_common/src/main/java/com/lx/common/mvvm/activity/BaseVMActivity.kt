@@ -9,6 +9,7 @@ import com.lx.common.mvvm.viewmodel.BaseViewModel
 import com.lx.common.mvvm.viewmodel.ErrorState
 import com.lx.common.mvvm.viewmodel.LoadingState
 import com.lx.common.mvvm.viewmodel.SucessState
+import com.lx.lib_base.ext.getVmClazz
 import com.lx.lib_base.ext.toastError
 import com.orhanobut.logger.Logger
 import java.lang.reflect.ParameterizedType
@@ -22,7 +23,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
     abstract val getLayoutRes: Int
-    lateinit var viewModel: VM
+    lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +46,13 @@ abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
 //            viewModel = ViewModelProvider(this).get( vmClass )
 //        else
 //            Logger.d("BaseVMActivity","could not find VM class for $this")
-        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
-        viewModel = ViewModelProvider(this)[parameterizedType.actualTypeArguments[0] as Class<VM>]
-        viewModel.uiState.observe(this){ state ->
+
+//        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
+//        mViewModel = ViewModelProvider(this)[parameterizedType.actualTypeArguments[0] as Class<VM>]
+
+        mViewModel = createViewModel()
+
+        mViewModel.uiState.observe(this){ state ->
             when(state) {
                 LoadingState -> {
                     showLoading()
@@ -62,6 +67,10 @@ abstract class BaseVMActivity<VM : BaseViewModel>: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun createViewModel(): VM {
+        return ViewModelProvider(this).get(getVmClazz(this))
     }
 
     protected fun <T : Any> LiveData<T>.observerKt(block: (T) -> Unit){

@@ -51,7 +51,7 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
 //            val str = homeApi.getTopArticles().apiData().get(0).author
 //            toastInfo(str.toString())
 //        }
-        viewModel.getSelect().observe(this){ index ->
+        mViewModel.getSelect().observe(this){ index ->
             switchFragment(index)
         }
     }
