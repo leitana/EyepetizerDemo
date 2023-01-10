@@ -21,7 +21,7 @@ import java.lang.reflect.ParameterizedType
  * @author linxiao
  * @data Created in 2022/12/22
  */
-abstract class BaseVMFragment<DB: ViewDataBinding, VM: BaseViewModel>: BaseFragment() {
+abstract class BaseVMFragment<VM: BaseViewModel, DB: ViewDataBinding>: BaseFragment() {
     lateinit var binding: DB
     lateinit var mViewModel: VM
 

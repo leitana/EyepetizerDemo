@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 @Route(path = RouterPath.Wan.PATH_WAN_FRAGMENT)
-class WanFragment: BaseVMFragment<WanActivityMainBinding, WanViewModel>() {
+class WanFragment: BaseVMFragment<WanViewModel, WanActivityMainBinding>() {
 
     private val mAdapter : ArticleAdapter by lazy { ArticleAdapter() }
 

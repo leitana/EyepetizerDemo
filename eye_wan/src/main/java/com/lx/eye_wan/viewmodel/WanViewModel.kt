@@ -6,6 +6,7 @@ import androidx.paging.cachedIn
 import com.lx.common.mvvm.viewmodel.BaseViewModel
 import com.lx.eye_wan.bean.HomeArticle
 import com.lx.eye_wan.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,7 +18,7 @@ import javax.inject.Inject
  * @author linxiao
  * @data Created in 2023/01/05
  */
-@ActivityRetainedScoped
+@HiltViewModel
 class WanViewModel @Inject constructor(val repository: Repository): BaseViewModel() {
     fun getArticleData(): Flow<PagingData<HomeArticle.DatasBean>> {
         // cachedIn() 函数，
