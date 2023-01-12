@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.lx.common.mvvm.fragment.BaseVMFragment
 import com.lx.common.router.RouterPath
+import com.lx.common.ui.adapter.FooterAdapter
 import com.lx.eye_wan.adapter.ArticleAdapter
 import com.lx.eye_wan.databinding.WanActivityMainBinding
 import com.lx.eye_wan.viewmodel.WanViewModel
@@ -31,6 +32,8 @@ class WanFragment: BaseVMFragment<WanViewModel, WanActivityMainBinding>() {
         binding.run {
             recyclerview.layoutManager = LinearLayoutManager(context)
             recyclerview.adapter = mAdapter
+//            recyclerview.adapter = mAdapter.withLoadStateFooter(FooterAdapter(mAdapter::retry))
+//            recyclerview.setHasFixedSize(true)
         }
     }
 
