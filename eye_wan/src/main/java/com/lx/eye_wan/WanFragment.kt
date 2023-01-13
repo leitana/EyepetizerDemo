@@ -31,9 +31,7 @@ class WanFragment: BaseVMFragment<WanViewModel, WanActivityMainBinding>() {
     override fun initView() {
         binding.run {
             recyclerview.layoutManager = LinearLayoutManager(context)
-//            recyclerview.adapter = mAdapter
             recyclerview.adapter = mAdapter.withLoadStateFooter(FooterAdapter(mAdapter::retry))
-//            recyclerview.setHasFixedSize(true)
         }
     }
 
