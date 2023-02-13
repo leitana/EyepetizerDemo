@@ -19,4 +19,6 @@ dependencies {
     kapt(Libs.Hilt.hilt_compiler)
     api(Libs.AndroidX.paging_runtime)
     api(Libs.AndroidX.paging_test)
+    api(Libs.smartRefresh)
+    api(Libs.smartRefreshHeader)
 }

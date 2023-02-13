@@ -90,4 +90,8 @@ object Libs {
     private const val immersionbar_version = "3.2.2"
     const val immersionbar = "com.geyifeng.immersionbar:immersionbar:$immersionbar_version"
     const val immersionbar_ktx = "com.geyifeng.immersionbar:immersionbar-ktx:$immersionbar_version"
+
+    private const val smart_refresh_version = "2.0.5"
+    const val smartRefresh = "io.github.scwang90:refresh-layout-kernel:$smart_refresh_version"
+    const val smartRefreshHeader = "io.github.scwang90:refresh-header-material:$smart_refresh_version"
 }

@@ -7,7 +7,7 @@ import com.lx.eye_wan.net.HomeApi
 import com.lx.eye_wan.net.apiData
 import javax.inject.Inject
 
-class WanPagingSource @Inject constructor(private val homeApi: HomeApi): PagingSource<Int, HomeArticle.DatasBean>() {
+class WanPagingSource constructor(private val homeApi: HomeApi): PagingSource<Int, HomeArticle.DatasBean>() {
     override fun getRefreshKey(state: PagingState<Int, HomeArticle.DatasBean>): Int? = null
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, HomeArticle.DatasBean> {

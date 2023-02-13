@@ -1,6 +1,7 @@
 package com.lx.eye_wan
 
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.lx.common.mvvm.fragment.BaseVMFragment
@@ -9,6 +10,9 @@ import com.lx.common.ui.adapter.FooterAdapter
 import com.lx.eye_wan.adapter.ArticleAdapter
 import com.lx.eye_wan.databinding.WanActivityMainBinding
 import com.lx.eye_wan.viewmodel.WanViewModel
+import com.lx.lib_base.ext.showToast
+import com.lx.lib_base.ext.toastError
+import com.scwang.smart.refresh.layout.constant.RefreshState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -32,7 +36,9 @@ class WanFragment: BaseVMFragment<WanViewModel, WanActivityMainBinding>() {
         binding.run {
             recyclerview.layoutManager = LinearLayoutManager(context)
             recyclerview.adapter = mAdapter.withLoadStateFooter(FooterAdapter(mAdapter::retry))
+            refreshLayout.setOnRefreshListener { mAdapter.refresh() }
         }
+        addLoadStateListener()
     }
 
     override fun lazyLoadData() {
@@ -41,5 +47,32 @@ class WanFragment: BaseVMFragment<WanViewModel, WanActivityMainBinding>() {
                 mAdapter.submitData(pagingData)
             }
         }
+    }
+
+    private fun addLoadStateListener(){
+        mAdapter.addLoadStateListener {
+            when(it.refresh){
+                is LoadState.NotLoading -> {
+                    loadFinished()
+                    if (it.source.append.endOfPaginationReached) {
+                        binding.refreshLayout.setEnableLoadMore(true)
+                        binding.refreshLayout.finishLoadMoreWithNoMoreData()
+                    } else {
+                        binding.refreshLayout.setEnableLoadMore(false)
+                    }
+                }
+                is LoadState.Loading -> {
+                }
+                is LoadState.Error -> {
+                    binding.refreshLayout.finishRefresh()
+                    val state = it.refresh as LoadState.Error
+                    toastError(state.error.message.toString())
+                }
+            }
+        }
+    }
+
+    private fun loadFinished(){
+        binding.refreshLayout.finishRefresh()
     }
 }
