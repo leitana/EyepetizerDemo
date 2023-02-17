@@ -1,0 +1,38 @@
+import com.lx.eyepetizerdemo.buildsrc.*
+apply from: '../base_module.gradle'
+android {
+    namespace = "com.lx.eye_daily"
+    resourcePrefix = "daily_"
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
+    sourceSets {
+        main {
+            if (Plugins.isAppMode.toBoolean()) {
+                //集成模式
+                //集成开发模式下排除debug文件夹中的所有Java文件
+//                java {
+//                    exclude 'debug/**'
+//                }
+//                kotlin { exclude '**/HomeApplication.kt' }
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                kotlin {
+                    exclude 'debug/**'
+                }
+            } else {
+                //单App模式
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+}
+
+dependencies {
+//    api project(path: ':lib_common')
+    implementation(Libs.banner)
+}

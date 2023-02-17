@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CommonTheme.EyepetizerDemo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/common_sub_title_color</item>
+        <item name="colorAccent">@color/common_share_icon_color</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@android:color/white</item>
+        <item name="colorSecondaryVariant">@color/common_sub_title_color</item>
+        <item name="colorOnSecondary">@color/common_share_icon_color</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+<!--        <item name="android:windowContentTransitions">true</item>-->
+<!--        <item name="android:windowActivityTransitions">true</item>-->
+    </style>
+</resources>

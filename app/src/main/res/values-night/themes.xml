@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.EyepetizerDemo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+<!--    <style name="Theme.EyepetizerDemo" parent="@style/HomeTheme.EyepetizerDemo">-->
+<!--    </style>-->
+    <style name="Theme.EyepetizerDemo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +14,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+    <style name="Theme.EyepetizerDemo.Launch">
+        <item name="android:windowBackground">@drawable/launch_layer_list</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

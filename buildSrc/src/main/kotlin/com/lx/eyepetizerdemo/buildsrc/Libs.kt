@@ -26,10 +26,16 @@ object Libs {
         const val startup = "androidx.startup:startup-runtime:1.1.1"
 
         private const val lifecycle_version = "2.5.1"
-        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+        const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+        const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+        const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+//        const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+
+        private const val paging_version = "3.1.1"
+        const val paging_runtime = "androidx.paging:paging-runtime:$paging_version"
+        const val paging_test = "androidx.paging:paging-common:$paging_version"
     }
 
     object Hilt {
@@ -80,4 +86,17 @@ object Libs {
 
     //toast
     const val toasty = "com.github.GrenderG:Toasty:1.5.2"
+
+    private const val immersionbar_version = "3.2.2"
+    const val immersionbar = "com.geyifeng.immersionbar:immersionbar:$immersionbar_version"
+    const val immersionbar_ktx = "com.geyifeng.immersionbar:immersionbar-ktx:$immersionbar_version"
+
+    private const val smart_refresh_version = "2.0.5"
+    const val smartRefresh = "io.github.scwang90:refresh-layout-kernel:$smart_refresh_version"
+    const val smartRefreshHeader = "io.github.scwang90:refresh-header-material:$smart_refresh_version"
+
+    const val banner = "io.github.youth5201314:banner:2.2.2"
+
+    //协程图片加载库
+    const val coil = "io.coil-kt:coil:2.2.2"
 }

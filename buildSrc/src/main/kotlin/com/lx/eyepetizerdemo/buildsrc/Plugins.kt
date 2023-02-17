@@ -1,5 +1,6 @@
 package com.lx.eyepetizerdemo.buildsrc
 
 object Plugins {
-    const val isAppMode = false
+    //是否集成为APP
+    const val isAppMode = true
 }

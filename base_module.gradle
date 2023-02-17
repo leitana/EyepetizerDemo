@@ -6,7 +6,7 @@ import com.lx.eyepetizerdemo.buildsrc.*
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.dagger.hilt.android'
-if (Plugins.isAppMode) {
+if (Plugins.isAppMode.toBoolean()) {
     apply plugin: 'com.android.library'
 } else {
     apply plugin: 'com.android.application'
@@ -63,4 +63,7 @@ dependencies {
 
     api(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
+
+    implementation(Libs.AndroidX.paging_runtime)
+    testImplementation(Libs.AndroidX.paging_test)
 }
