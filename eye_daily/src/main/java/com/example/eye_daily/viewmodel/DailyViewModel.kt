@@ -22,8 +22,13 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class DailyViewModel @Inject constructor(private val repository: DialyRepository): BaseViewModel() {
-
+    @Inject
+    lateinit var dailyUrlManage: DailyUrlManage
     fun getDailyList(): Flow<PagingData<ProviderMultiModel>>{
         return repository.getDailyList().cachedIn(viewModelScope)
+    }
+
+    fun initDailyUrlManage() {
+        dailyUrlManage.setDailyUrl(Constant.BANNER_URL)
     }
 }

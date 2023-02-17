@@ -53,9 +53,14 @@ class DailyPagingSource(val dailyApi: DailyApi, val dailyUrlManager: DailyUrlMan
 //            val repoItems = dataList.issueList[0].itemList
             val prevKey = null
             val nextKey = if (repoItems.isNotEmpty() && dataList.nextPageUrl.isNotEmpty()) dataList.nextPageUrl else null
+            nextKey?.let { dailyUrlManager.setDailyUrl(it) }
             LoadResult.Page(providerMultiModels, prevKey, nextKey)
         } catch(e: Exception) {
             LoadResult.Error(e)
         }
     }
+
+    //以表示支持键重用。
+    override val keyReuseSupported: Boolean
+        get() = true
 }

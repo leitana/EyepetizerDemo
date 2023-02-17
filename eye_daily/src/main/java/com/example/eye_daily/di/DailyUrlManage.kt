@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.eye_daily.constant.Constant
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @title：DailyUrlManage
@@ -12,6 +13,7 @@ import javax.inject.Inject
  * @author linxiao
  * @data Created in 2023/02/16
  */
+@Singleton
 class DailyUrlManage @Inject constructor() {
     private val _daily = MutableLiveData<String>(Constant.BANNER_URL)
     val dailyUrl: LiveData<String> = _daily

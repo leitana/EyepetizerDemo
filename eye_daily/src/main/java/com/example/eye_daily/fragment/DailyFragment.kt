@@ -35,7 +35,10 @@ class DailyFragment: BaseVMFragment<DailyViewModel, DailyFragmentListBinding>() 
         binding.run {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = mAdapter.withLoadStateFooter(FooterAdapter(mAdapter::retry))
-            refreshLayout.setOnRefreshListener { mAdapter.refresh() }
+            refreshLayout.setOnRefreshListener {
+                mViewModel.initDailyUrlManage()
+                mAdapter.refresh()
+            }
         }
         addLoadStateListener()
     }
@@ -61,6 +64,7 @@ class DailyFragment: BaseVMFragment<DailyViewModel, DailyFragmentListBinding>() 
                     }
                 }
                 is LoadState.Loading -> {
+                    binding.refreshLayout.autoRefresh()
                 }
                 is LoadState.Error -> {
                     binding.refreshLayout.finishRefresh()

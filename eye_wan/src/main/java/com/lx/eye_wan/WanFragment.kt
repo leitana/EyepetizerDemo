@@ -10,9 +10,7 @@ import com.lx.common.ui.adapter.FooterAdapter
 import com.lx.eye_wan.adapter.ArticleAdapter
 import com.lx.eye_wan.databinding.WanActivityMainBinding
 import com.lx.eye_wan.viewmodel.WanViewModel
-import com.lx.lib_base.ext.showToast
 import com.lx.lib_base.ext.toastError
-import com.scwang.smart.refresh.layout.constant.RefreshState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -62,6 +60,7 @@ class WanFragment: BaseVMFragment<WanViewModel, WanActivityMainBinding>() {
                     }
                 }
                 is LoadState.Loading -> {
+                    binding.refreshLayout.autoRefresh()
                 }
                 is LoadState.Error -> {
                     binding.refreshLayout.finishRefresh()

@@ -96,12 +96,12 @@ class DailyAdapter(val activity: Activity, val owner: LifecycleOwner): PagingDat
             }
             ProviderMultiModel.Type.TYPE_TITLE -> {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.daily_item_banner, parent, false)
+                    .inflate(R.layout.daily_item_head_text, parent, false)
                 return HeaderTextViewHolder(view)
             }
             ProviderMultiModel.Type.TYPE_IMAGE -> {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.daily_item_banner, parent, false)
+                    .inflate(R.layout.daily_item_image_text, parent, false)
                 return ImageTextViewHolder(view)
             }
             else -> {
