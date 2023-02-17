@@ -94,4 +94,9 @@ object Libs {
     private const val smart_refresh_version = "2.0.5"
     const val smartRefresh = "io.github.scwang90:refresh-layout-kernel:$smart_refresh_version"
     const val smartRefreshHeader = "io.github.scwang90:refresh-header-material:$smart_refresh_version"
+
+    const val banner = "io.github.youth5201314:banner:2.2.2"
+
+    //协程图片加载库
+    const val coil = "io.coil-kt:coil:2.2.2"
 }

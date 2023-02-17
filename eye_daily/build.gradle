@@ -34,4 +34,5 @@ android {
 
 dependencies {
 //    api project(path: ':lib_common')
+    implementation(Libs.banner)
 }

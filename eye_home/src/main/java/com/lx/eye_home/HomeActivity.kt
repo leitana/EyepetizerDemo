@@ -30,6 +30,7 @@ import javax.inject.Inject
 class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
 
     private var mWanAndroidFragment: Fragment? = null
+    private var mDailyFragment: Fragment? = null
 
     @Inject
     lateinit var homeApi: HomeApi
@@ -39,11 +40,14 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
 
     override fun initView() {
         immersionBar {
+            //顶部状态栏颜色
             statusBarColor(R.color.home_white)
-            navigationBarColor(R.color.home_white)
+            //底部导航栏颜色
+//            navigationBarColor(R.color.home_white)
         }
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR//状态栏为白色 图标显示深色
         mBinding.mBottomNavigationView.itemIconTintList = null
+        initBottomNavigation()
     }
 
     override fun initData() {
@@ -59,6 +63,24 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
     override fun startObserve() {
     }
 
+    private fun saveAndSwitch(index: Int){
+        mViewModel.saveSelect(index)
+        switchFragment(index)
+    }
+
+    private fun initBottomNavigation() {
+        mBinding.mBottomNavigationView.itemIconTintList = null
+        mBinding.mBottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.item_wan -> saveAndSwitch(0)
+                R.id.item_daily -> saveAndSwitch(1)
+                R.id.item_hot -> saveAndSwitch(2)
+                R.id.item_person -> saveAndSwitch(3)
+            }
+            true
+        }
+    }
+
     private fun switchFragment(position: Int){
         val transaction = supportFragmentManager.beginTransaction()
         hideFragments(transaction)
@@ -70,11 +92,19 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
                     mWanAndroidFragment = it
                 transaction.add(R.id.mContentFL, it, RouterPath.Wan.PATH_WAN_FRAGMENT)
             }
+            1 -> mDailyFragment?.let {
+                transaction.show(it)
+            } ?: (ARouter.getInstance().build(RouterPath.Daily.PATH_DAILY_FRAGMENT)
+                .navigation() as Fragment).let {
+                    mDailyFragment = it
+                transaction.add(R.id.mContentFL, it, RouterPath.Daily.PATH_DAILY_FRAGMENT)
+            }
         }
         transaction.commitNowAllowingStateLoss()
     }
 
     private fun hideFragments(transaction: FragmentTransaction){
         mWanAndroidFragment?.let { transaction.hide(it) }
+        mDailyFragment?.let { transaction.hide(it) }
     }
 }

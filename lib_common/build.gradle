@@ -21,4 +21,5 @@ dependencies {
     api(Libs.AndroidX.paging_test)
     api(Libs.smartRefresh)
     api(Libs.smartRefreshHeader)
+    api(Libs.coil)
 }

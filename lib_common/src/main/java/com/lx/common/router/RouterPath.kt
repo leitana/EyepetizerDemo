@@ -13,4 +13,10 @@ object RouterPath {
              const val PATH_WAN_FRAGMENT = "/wan/articalFragment"
          }
      }
+
+    class Daily {
+        companion object{
+            const val PATH_DAILY_FRAGMENT = "/daily/dailyFragment"
+        }
+    }
 }

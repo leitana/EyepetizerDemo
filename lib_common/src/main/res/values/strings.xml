@@ -2,4 +2,6 @@
 <resources>
     <!-- 网络 -->
     <string name="common_error_view_tip_retry">加载失败，点击重试</string>
+    <string name="share_image">share_image</string>
+    <string name="icon_share_text">&#xe6c0;</string>
 </resources>
