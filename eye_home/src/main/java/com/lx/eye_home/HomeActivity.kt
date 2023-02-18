@@ -39,14 +39,9 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
         get() = R.layout.home_activity
 
     override fun initView() {
-        immersionBar {
-            //顶部状态栏颜色
-            statusBarColor(R.color.home_white)
-            //底部导航栏颜色
-//            navigationBarColor(R.color.home_white)
-        }
+        immersionStatusBar(false, android.R.color.white, true, 0.5f)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR//状态栏为白色 图标显示深色
-        mBinding.mBottomNavigationView.itemIconTintList = null
+//        mBinding.mBottomNavigationView.itemIconTintList = null
         initBottomNavigation()
     }
 

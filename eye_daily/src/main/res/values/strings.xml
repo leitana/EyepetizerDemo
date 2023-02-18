@@ -1,3 +1,6 @@
-<resources>
-    <string name="app_name">eye_daily</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="daily_app_name">eye_daily</string>
+
+    <string name="daily_home_paper">日报</string>
+    <string name="daily_common_search_icon">&#xe725;</string>
 </resources>

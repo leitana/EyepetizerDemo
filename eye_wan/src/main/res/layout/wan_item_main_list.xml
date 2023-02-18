@@ -24,8 +24,12 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/wan_viewBackground"
+        android:padding="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
         app:cardCornerRadius="@dimen/dp_1"
-        app:cardElevation="@dimen/dp_1">
+        app:cardElevation="@dimen/dp_20">
 
         <RelativeLayout
             android:layout_width="match_parent"
