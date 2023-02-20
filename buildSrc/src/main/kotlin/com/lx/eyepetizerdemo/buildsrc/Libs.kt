@@ -36,6 +36,9 @@ object Libs {
         private const val paging_version = "3.1.1"
         const val paging_runtime = "androidx.paging:paging-runtime:$paging_version"
         const val paging_test = "androidx.paging:paging-common:$paging_version"
+
+        private const val data_store = "1.0.0"
+        const val preference_data_store = "androidx.datastore:datastore-preferences:$data_store"
     }
 
     object Hilt {
