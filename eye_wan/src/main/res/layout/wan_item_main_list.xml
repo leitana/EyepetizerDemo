@@ -25,9 +25,7 @@
         android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/wan_viewBackground"
         android:padding="@dimen/dp_10"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_0_5"
         app:cardCornerRadius="@dimen/dp_1"
         app:cardElevation="@dimen/dp_20">
 

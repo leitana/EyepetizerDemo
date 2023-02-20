@@ -45,6 +45,7 @@ dependencies {
         implementation project(':eye_home')
         implementation project(':eye_wan')
         implementation project(':eye_daily')
+        implementation project(':eye_player')
     } else {
         implementation project(':lib_common')
     }
