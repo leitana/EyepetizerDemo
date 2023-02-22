@@ -5,13 +5,18 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.eye_daily.model.DailyModel
 import com.example.eye_daily.model.ProviderMultiModel
+import com.lx.common.Constants
+import com.lx.common.ext.toJson
+import com.lx.common.router.RouterPath
 import com.lx.eye_daily.R
 import com.lx.eye_daily.databinding.DailyItemBannerBinding
 import com.lx.eye_daily.databinding.DailyItemHeadTextBinding
@@ -67,14 +72,6 @@ class DailyAdapter(val activity: Activity, val owner: LifecycleOwner): PagingDat
                     setAdapter(BannerImageAdapter(this.context, item?.items!!))
                     addBannerLifecycleObserver(owner)
                     indicator = CircleIndicator(this.context)
-//                    setOnBannerListener { _, position ->
-//                        go2VideoPlayerActivity(
-//                            activity,
-//                            null,
-//                            item.items[position].data,
-//                            true
-//                        )
-//                    }
                 }
             }
             is HeaderTextViewHolder -> {
@@ -83,6 +80,23 @@ class DailyAdapter(val activity: Activity, val owner: LifecycleOwner): PagingDat
 
             is ImageTextViewHolder -> {
                 holder.binding.model = item
+                holder.binding.ivCover.setOnClickListener {
+                    ARouter.getInstance().build(RouterPath.Video.PATH_PLAYER_Activity)
+                        .also { postcard ->
+                            it?.let { shareView ->
+                                postcard.withOptionsCompat(
+                                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                        activity,
+                                        shareView,
+                                        Constants.SHARED_ELEMENT_NAME
+                                    )
+                                )
+                            }
+                        }
+                        .withString(Constants.VIDEO_MODE_KEY, toJson(item?.item?.data!!))
+                        .withBoolean(Constants.VIDEO_IS_FROM_RELATE_KEY, false)
+                        .navigation(activity)
+                }
             }
         }
     }

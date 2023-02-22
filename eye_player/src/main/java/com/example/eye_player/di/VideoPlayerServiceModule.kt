@@ -1,6 +1,7 @@
 package com.example.eye_player.di
 
 import com.example.eye_player.api.VideoPlayerApi
+import com.lx.common.net.EyeUrlQualifier
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +22,7 @@ object VideoPlayerServiceModule {
 
     @Singleton
     @Provides
-    fun provideVideoPlayerService(retrofit: Retrofit): VideoPlayerApi{
+    fun provideVideoPlayerService(@EyeUrlQualifier retrofit: Retrofit): VideoPlayerApi{
         return retrofit.create(VideoPlayerApi::class.java)
     }
 }

@@ -1,9 +1,38 @@
 package com.example.eye_player.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.view.ViewGroup
+import android.view.ViewParent
+import android.view.ViewTreeObserver
+import android.widget.FrameLayout
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import cn.jzvd.Jzvd
+import cn.jzvd.JzvdStd
+import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.BarUtils
+import com.example.eye_player.adapter.VideoRelateAdapter
+import com.example.eye_player.jvzd.JZVDObserver
+import com.example.eye_player.jvzd.JzvdStdRv
+import com.example.eye_player.jvzd.ViewAttr
+import com.example.eye_player.jvzd.ViewMoveHelper
 import com.example.eye_player.viewmodel.VideoPlayerViewModel
+import com.lx.common.Constants
+import com.lx.common.ext.fromJson
+import com.lx.common.model.Data
 import com.lx.common.mvvm.activity.BaseBindVMActivity
+import com.lx.common.mvvm.viewmodel.ErrorState
+import com.lx.common.mvvm.viewmodel.LoadingState
+import com.lx.common.mvvm.viewmodel.SucessState
+import com.lx.common.mvvm.viewmodel.ViewState
+import com.lx.common.router.RouterPath
 import com.lx.eye_player.R
 import com.lx.eye_player.databinding.PlayerActivityVideoBinding
+import com.lx.lib_base.ext.immersionStatusBar
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @title：VideoPlayerActivity
@@ -12,16 +41,162 @@ import com.lx.eye_player.databinding.PlayerActivityVideoBinding
  * @author linxiao
  * @data Created in 2023/02/20
  */
+@AndroidEntryPoint
+@Route(path = RouterPath.Video.PATH_PLAYER_Activity)
 class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivityVideoBinding>() {
+
+    private val DURATION: Long = 250
+
+    private lateinit var videoModel: Data
+
+    @JvmField
+    @Autowired(name = Constants.VIDEO_MODE_KEY)
+    var videoModelJSON: String = ""
+
+    @JvmField
+    @Autowired(name = Constants.VIDEO_IS_FROM_RELATE_KEY)
+    var fromRelate: Boolean = false
+
+    private lateinit var mCurrentAttr: ViewAttr
+
+    @Autowired(name = Constants.VIDEO_IS_FROM_PLAYLIST_KEY)
+    lateinit var viewAttr: ViewAttr
+
+    private fun isInitViewAttr() = ::viewAttr.isInitialized
+
+    private val mAdapter: VideoRelateAdapter by lazy { VideoRelateAdapter() }
+
     override val getLayoutRes: Int
         get() = R.layout.player_activity_video
 
     override fun initView() {
+        immersionStatusBar(false, android.R.color.white, true, 0.5f)
+        mBinding.run {
+            mRecyclerView.layoutManager = LinearLayoutManager(this@VideoPlayerActivity)
+            mRecyclerView.isNestedScrollingEnabled = false
+            mRecyclerView.adapter = mAdapter
+            smartRefresh.setEnableLoadMore(false)
+            smartRefresh.setOnRefreshListener {
+                getRelateVideoList()
+            }
+        }
+
     }
 
     override fun initData() {
+        ARouter.getInstance().inject(this)
+        videoModel = fromJson(videoModelJSON)
+        mBinding.videoModel = videoModel
+        mViewModel.videoModelList.add(videoModel)
+
+        if (isInitViewAttr()){ //从播放列表进入
+            addVideoViewFromList()
+        } else {
+            addNormalVideoView()
+            lifecycle.addObserver(JZVDObserver())
+            mBinding.smartRefresh.autoRefresh()
+        }
     }
 
     override fun startObserve() {
+
+        mViewModel.relateVideoList.observe(this){
+            mAdapter.items = it
+        }
+    }
+
+    override fun showLoading() {
+//        mBinding.smartRefresh.autoRefresh()
+    }
+
+    override fun hideLoading() {
+        mBinding.smartRefresh.finishRefresh()
+    }
+
+    override fun handlerError() {
+        mBinding.smartRefresh.finishRefresh()
+    }
+
+    private fun addNormalVideoView(){
+        mBinding.mSurfaceContainer.viewTreeObserver
+            .addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
+                override fun onPreDraw(): Boolean {
+                    mBinding.mSurfaceContainer.viewTreeObserver.removeOnPreDrawListener(this)
+                    val jzvdStd = JzvdStd(this@VideoPlayerActivity).apply {
+                        setUp(videoModel.playUrl, videoModel.title)
+                        startVideo()
+                    }
+                    mBinding.mSurfaceContainer.addView(
+                        jzvdStd, FrameLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                    )
+                    return true
+                }
+            })
+    }
+
+    private fun addVideoViewFromList(){
+        mBinding.mSurfaceContainer.viewTreeObserver
+            .addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
+                override fun onPreDraw(): Boolean {
+                    mBinding.mSurfaceContainer.viewTreeObserver.removeOnPreDrawListener(this)
+                    //将Jzvd从列表中移除再添加到播放详情渲染控件中，实现无缝续播功能
+                    val parent: ViewParent = JzvdStdRv.CURRENT_JZVD.parent
+                    (parent as ViewGroup).removeView(JzvdStdRv.CURRENT_JZVD)
+                    mBinding.mSurfaceContainer.addView(
+                        JzvdStdRv.CURRENT_JZVD, FrameLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                    )
+                    //获取视频详情页面视频渲染控件的坐标以及宽高
+                    mCurrentAttr = ViewAttr()
+                    val location = IntArray(2)
+                    mBinding.mSurfaceContainer.getLocationInWindow(location)
+                    mCurrentAttr.x = location[0]
+                    mCurrentAttr.y = location[1] - BarUtils.getStatusBarHeight()
+                    mCurrentAttr.width = mBinding.mSurfaceContainer.measuredWidth
+                    mCurrentAttr.height = mBinding.mSurfaceContainer.measuredHeight
+                    //开启平移动画实现将列表播放控件平移到详情渲染控件的过渡效果
+                    ViewMoveHelper(mBinding.mSurfaceContainer, viewAttr, mCurrentAttr, DURATION).startAnim()
+                        .addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                super.onAnimationEnd(animation)
+                                mBinding.smartRefresh.autoRefresh()
+                            }
+                        })
+
+                    return true
+                }
+
+            })
+    }
+
+    private fun getRelateVideoList(){
+        mViewModel.getRelateVideoList(videoModel.id)
+    }
+
+    private fun backAnimation() {
+        ViewMoveHelper(mBinding.mSurfaceContainer, mCurrentAttr, viewAttr, DURATION).startAnim()
+        mBinding.mVideoBackground.isVisible = false
+        mBinding.smartRefresh.finishRefresh()
+        mBinding.mSurfaceContainer.postDelayed({
+//            LiveDataBus.with<VideoAutoPlayEvent>(BaseConstant.VIDEO_AUTO_PLAY_EVENT)
+//                .setData(VideoAutoPlayEvent())
+            finish()
+            overridePendingTransition(0, 0)
+        }, DURATION)
+    }
+    override fun onBackPressed() {
+        if (Jzvd.backPress()) {
+            return
+        }
+        if (isInitViewAttr()) {
+            backAnimation()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

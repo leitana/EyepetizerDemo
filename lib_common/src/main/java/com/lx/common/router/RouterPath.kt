@@ -19,4 +19,10 @@ object RouterPath {
             const val PATH_DAILY_FRAGMENT = "/daily/dailyFragment"
         }
     }
+
+    class Video {
+        companion object{
+            const val PATH_PLAYER_Activity = "/player/playerRelateActivity"
+        }
+    }
 }

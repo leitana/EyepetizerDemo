@@ -36,6 +36,7 @@
                 android:layout_height="@dimen/dp_250" />
 
             <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/smartRefresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -137,50 +138,54 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="@dimen/dp_10"
-                            android:paddingBottom="@dimen/dp_10">
+                            android:padding="@dimen/dp_10">
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/iv_author"
                                 android:layout_width="@dimen/dp_40"
                                 android:layout_height="@dimen/dp_40"
-                                android:layout_marginStart="@dimen/dp_10"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:shapeAppearance="@style/circleStyle"
+                                bind:layout_constraintBottom_toBottomOf="parent"
+                                bind:layout_constraintStart_toStartOf="parent"
+                                bind:layout_constraintTop_toTopOf="parent"
                                 bind:url="@{videoModel.author.icon}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_title"
-                                android:layout_width="wrap_content"
+                                android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_10"
                                 android:text="@{String.valueOf(videoModel.author.name)}"
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/sp_15"
                                 app:layout_constraintLeft_toRightOf="@id/iv_author"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                bind:layout_constraintStart_toEndOf="@+id/iv_author"
+                                bind:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_10"
-                                android:layout_marginEnd="@dimen/dp_10"
                                 android:text="@{String.valueOf(videoModel.author.description)}"
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/sp_13"
+                                android:layout_marginEnd="@dimen/dp_10"
                                 app:layout_constraintHorizontal_weight="1"
                                 app:layout_constraintLeft_toRightOf="@id/iv_author"
                                 app:layout_constraintRight_toLeftOf="@id/gr_follow"
-                                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+                                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                                bind:layout_constraintEnd_toStartOf="@+id/gr_follow"
+                                bind:layout_constraintStart_toStartOf="@+id/tv_title"
+                                bind:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/gr_follow"
-                                style="@style/Widget.MaterialComponents.Button.TextButton"
+                                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                                 android:layout_width="@dimen/dp_50"
                                 android:layout_height="@dimen/dp_30"
-                                android:layout_marginEnd="@dimen/dp_10"
                                 android:insetTop="@dimen/dp_0"
                                 android:insetBottom="@dimen/dp_0"
                                 android:padding="@dimen/dp_0"
@@ -192,7 +197,9 @@
                                 app:cornerRadius="@dimen/dp_5"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                bind:layout_constraintEnd_toEndOf="parent"
+                                bind:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                         <View
