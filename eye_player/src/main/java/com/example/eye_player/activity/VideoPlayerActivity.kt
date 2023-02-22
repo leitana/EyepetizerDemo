@@ -24,10 +24,6 @@ import com.lx.common.Constants
 import com.lx.common.ext.fromJson
 import com.lx.common.model.Data
 import com.lx.common.mvvm.activity.BaseBindVMActivity
-import com.lx.common.mvvm.viewmodel.ErrorState
-import com.lx.common.mvvm.viewmodel.LoadingState
-import com.lx.common.mvvm.viewmodel.SucessState
-import com.lx.common.mvvm.viewmodel.ViewState
 import com.lx.common.router.RouterPath
 import com.lx.eye_player.R
 import com.lx.eye_player.databinding.PlayerActivityVideoBinding
@@ -70,7 +66,7 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
         get() = R.layout.player_activity_video
 
     override fun initView() {
-        immersionStatusBar(false, android.R.color.white, true, 0.5f)
+        immersionStatusBar(true, android.R.color.white, true, 0.5f)
         mBinding.run {
             mRecyclerView.layoutManager = LinearLayoutManager(this@VideoPlayerActivity)
             mRecyclerView.isNestedScrollingEnabled = false
