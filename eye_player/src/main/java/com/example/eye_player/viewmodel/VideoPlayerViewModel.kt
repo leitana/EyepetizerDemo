@@ -2,6 +2,7 @@ package com.example.eye_player.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.eye_player.api.VideoPlayerApi
 import com.example.eye_player.repository.VideoPlayerRepository
 import com.lx.common.model.Data
 import com.lx.common.model.Item
@@ -18,16 +19,19 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class VideoPlayerViewModel @Inject constructor(
+    val videoPlayerRepository: VideoPlayerRepository): BaseViewModel() {
 
-    private val videoPlayerRepository: VideoPlayerRepository): BaseViewModel() {
-    private val _relateVideoList = MutableLiveData<List<Item>>()
-    val relateVideoList: LiveData<List<Item>> = _relateVideoList
+    var relateVideoList = MutableLiveData<List<Item>>()
 
     var videoModelList: MutableList<Data> = mutableListOf()
 
-    fun getRelateVideoList(id: Int): LiveData<List<Item>> = flowEx {
+    fun getRelateVideoList(id: Int) = flowEx {
         videoPlayerRepository.getRelateVideoList(id)
     }
+//    suspend fun test(id: Int) {
+//        val data = mVideoPlayerApi.getRelateVideoList(id)
+//        val test = data.itemList
+//    }
 
     //移除最新的，并返回当前最前的数据
     fun removeVideoModel(): Data?{
@@ -41,5 +45,9 @@ class VideoPlayerViewModel @Inject constructor(
         } else {
             null
         }
+    }
+
+    fun test(): Int{
+        return 11111
     }
 }

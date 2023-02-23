@@ -11,7 +11,7 @@ object Constants {
     //wanAndroid
     const val WAN_URL = "https://www.wanandroid.com/"
     //开眼api
-    const val EYE_URL = "http://baobab.kaiyanapp.com/"
+    const val EYE_URL = "http://baobab.kaiyanapp.com/api/"
 
     const val SHARED_ELEMENT_NAME = "share_image"
 

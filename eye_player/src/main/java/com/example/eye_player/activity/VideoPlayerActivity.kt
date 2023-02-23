@@ -7,6 +7,7 @@ import android.view.ViewParent
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.jzvd.Jzvd
 import cn.jzvd.JzvdStd
@@ -28,7 +29,10 @@ import com.lx.common.router.RouterPath
 import com.lx.eye_player.R
 import com.lx.eye_player.databinding.PlayerActivityVideoBinding
 import com.lx.lib_base.ext.immersionStatusBar
+import com.lx.lib_base.ext.showToast
+import com.lx.lib_base.ext.toastInfo
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * @title：VideoPlayerActivity
@@ -95,10 +99,6 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
     }
 
     override fun startObserve() {
-
-        mViewModel.relateVideoList.observe(this){
-            mAdapter.items = it
-        }
     }
 
     override fun showLoading() {
@@ -171,7 +171,14 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
     }
 
     private fun getRelateVideoList(){
-        mViewModel.getRelateVideoList(videoModel.id)
+//        toastInfo(mViewModel.test().toString())
+        mViewModel.getRelateVideoList(videoModel.id).observe(this) {
+            mAdapter.submitList(it)
+        }
+
+//        lifecycleScope.launch {
+//            mViewModel.test(videoModel.id)
+//        }
     }
 
     private fun backAnimation() {
