@@ -36,6 +36,9 @@ object Libs {
         private const val paging_version = "3.1.1"
         const val paging_runtime = "androidx.paging:paging-runtime:$paging_version"
         const val paging_test = "androidx.paging:paging-common:$paging_version"
+
+        private const val data_store = "1.0.0"
+        const val preference_data_store = "androidx.datastore:datastore-preferences:$data_store"
     }
 
     object Hilt {
@@ -84,6 +87,9 @@ object Libs {
     const val coroutines_core ="org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     const val coroutines_android ="org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
+    //RecyclerViewAdapter
+    const val recyclerViewAdapter = "io.github.cymchad:BaseRecyclerViewAdapterHelper:4.0.0-beta04"
+
     //toast
     const val toasty = "com.github.GrenderG:Toasty:1.5.2"
 
@@ -99,4 +105,7 @@ object Libs {
 
     //协程图片加载库
     const val coil = "io.coil-kt:coil:2.2.2"
+
+    //视频播放框架
+    const val jzvd = "cn.jzvd:jiaozivideoplayer:7.7.0"
 }

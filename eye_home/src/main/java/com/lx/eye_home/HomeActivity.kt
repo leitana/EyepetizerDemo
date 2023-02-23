@@ -69,8 +69,8 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
             when (it.itemId) {
                 R.id.item_wan -> saveAndSwitch(0)
                 R.id.item_daily -> saveAndSwitch(1)
-                R.id.item_hot -> saveAndSwitch(2)
-                R.id.item_person -> saveAndSwitch(3)
+//                R.id.item_hot -> saveAndSwitch(2)
+//                R.id.item_person -> saveAndSwitch(3)
             }
             true
         }

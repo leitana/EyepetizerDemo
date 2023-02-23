@@ -8,16 +8,16 @@
         android:id="@+id/item_daily"
         android:icon="@drawable/home_shape_tab_daily"
         android:title="@string/home_paper" />
-    <item
-        android:id="@+id/item_discover"
-        android:icon="@drawable/home_shape_tab_discover"
-        android:title="@string/home_discover" />
-    <item
-        android:id="@+id/item_hot"
-        android:icon="@drawable/home_shape_tab_hot"
-        android:title="@string/home_hot" />
-    <item
-        android:id="@+id/item_person"
-        android:icon="@drawable/home_shape_tab_person"
-        android:title="@string/home_person" />
+<!--    <item-->
+<!--        android:id="@+id/item_discover"-->
+<!--        android:icon="@drawable/home_shape_tab_discover"-->
+<!--        android:title="@string/home_discover" />-->
+<!--    <item-->
+<!--        android:id="@+id/item_hot"-->
+<!--        android:icon="@drawable/home_shape_tab_hot"-->
+<!--        android:title="@string/home_hot" />-->
+<!--    <item-->
+<!--        android:id="@+id/item_person"-->
+<!--        android:icon="@drawable/home_shape_tab_person"-->
+<!--        android:title="@string/home_person" />-->
 </menu>

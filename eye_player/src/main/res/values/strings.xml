@@ -1,0 +1,7 @@
+<resources>
+    <string name="player_app_name">eye_player</string>
+    <string name="player_icon_share_text">&#xe60c;</string>
+    <string name="player_comment_text">&#xe6ec;</string>
+    <string name="player_love_text">&#xe735;</string>
+    <string name="player_add_follow">+ 关注</string>
+</resources>

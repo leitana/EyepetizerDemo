@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.lx.common.utils.DateUtils" />
+
+        <variable
+            name="model"
+            type="com.lx.common.model.Data" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_15">
+
+        <FrameLayout
+            android:id="@+id/fl_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="@dimen/dp_135"
+                android:layout_height="@dimen/dp_80"
+                android:scaleType="centerCrop"
+                app:shapeAppearance="@style/roundedCornerStyle"
+                bind:url="@{model.component9().feed}" />
+
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="@dimen/dp_38"
+                android:layout_height="@dimen/dp_20"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:insetTop="@dimen/dp_0"
+                android:insetBottom="@dimen/dp_0"
+                android:padding="@dimen/dp_0"
+                android:text="@{DateUtils.INSTANCE.formatDateMsByMS(model.duration * 1000)}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_10"
+                app:backgroundTint="@color/black"
+                app:cornerRadius="@dimen/dp_5"
+                app:layout_constraintBottom_toTopOf="@id/iv_author"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:gravity="start"
+            android:text="@{model.title}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/fl_cover"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_15"
+            android:gravity="center"
+            android:text="@{`#` + model.category +` / ` + (model.author == null ? `` : model.author.name)}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/fl_cover"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

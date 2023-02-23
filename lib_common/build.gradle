@@ -22,4 +22,7 @@ dependencies {
     api(Libs.smartRefresh)
     api(Libs.smartRefreshHeader)
     api(Libs.coil)
+    api(Libs.AndroidX.preference_data_store)
+    api(Libs.recyclerViewAdapter)
+    api(Libs.jzvd)
 }
