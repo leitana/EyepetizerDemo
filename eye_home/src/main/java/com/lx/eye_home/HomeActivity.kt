@@ -80,19 +80,19 @@ class HomeActivity: BaseBindVMActivity<HomeViewModel, HomeActivityBinding>(){
         val transaction = supportFragmentManager.beginTransaction()
         hideFragments(transaction)
         when(position) {
-            0 -> mWanAndroidFragment?.let {
-                transaction.show(it)
-            } ?: (ARouter.getInstance().build(RouterPath.Wan.PATH_WAN_FRAGMENT)
-                .navigation() as Fragment).let {
-                    mWanAndroidFragment = it
-                transaction.add(R.id.mContentFL, it, RouterPath.Wan.PATH_WAN_FRAGMENT)
-            }
-            1 -> mDailyFragment?.let {
+            0 -> mDailyFragment?.let {
                 transaction.show(it)
             } ?: (ARouter.getInstance().build(RouterPath.Daily.PATH_DAILY_FRAGMENT)
                 .navigation() as Fragment).let {
-                    mDailyFragment = it
+                mDailyFragment = it
                 transaction.add(R.id.mContentFL, it, RouterPath.Daily.PATH_DAILY_FRAGMENT)
+            }
+            1 -> mWanAndroidFragment?.let {
+                transaction.show(it)
+            } ?: (ARouter.getInstance().build(RouterPath.Wan.PATH_WAN_FRAGMENT)
+                .navigation() as Fragment).let {
+                mWanAndroidFragment = it
+                transaction.add(R.id.mContentFL, it, RouterPath.Wan.PATH_WAN_FRAGMENT)
             }
         }
         transaction.commitNowAllowingStateLoss()
