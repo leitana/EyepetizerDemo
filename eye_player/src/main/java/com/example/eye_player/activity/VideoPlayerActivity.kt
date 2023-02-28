@@ -2,10 +2,12 @@ package com.example.eye_player.activity
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.transition.Transition
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.BarUtils
+import com.example.eye_player.adapter.TransitionListenerAdapter
 import com.example.eye_player.adapter.VideoRelateAdapter
 import com.example.eye_player.jvzd.JZVDObserver
 import com.example.eye_player.jvzd.JzvdStdRv
@@ -46,6 +49,8 @@ import kotlinx.coroutines.launch
 class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivityVideoBinding>() {
 
     private val DURATION: Long = 250
+
+    private var mTransition: Transition? = null
 
     private lateinit var videoModel: Data
 
@@ -94,7 +99,11 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
         } else {
             addNormalVideoView()
             lifecycle.addObserver(JZVDObserver())
-            mBinding.smartRefresh.autoRefresh()
+            if (fromRelate) {
+                mBinding.smartRefresh.autoRefresh()
+            } else {
+                initTransition()
+            }
         }
     }
 
@@ -179,6 +188,27 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
 //        lifecycleScope.launch {
 //            mViewModel.test(videoModel.id)
 //        }
+    }
+
+    private fun initTransition() {
+        //因为进入视频详情页面后还需请求数据，所以在过渡动画完成后在请求数据
+        //延迟动画执行
+        postponeEnterTransition()
+        //设置共用元素对应的View
+        ViewCompat.setTransitionName(mBinding.mSurfaceContainer, Constants.SHARED_ELEMENT_NAME)
+        //获取共享元素进入转场对象
+        mTransition = window.sharedElementEnterTransition
+        //设置共享元素动画执行完成的回调事件
+        mTransition?.addListener(object : TransitionListenerAdapter() {
+            override fun onTransitionEnd(transition: Transition?) {
+//                getRelateVideoList()
+                mBinding.smartRefresh.autoRefresh()
+                //移除共享元素动画监听事件
+                mTransition?.removeListener(this)
+            }
+        })
+        //开始动画执行
+        startPostponedEnterTransition()
     }
 
     private fun backAnimation() {
