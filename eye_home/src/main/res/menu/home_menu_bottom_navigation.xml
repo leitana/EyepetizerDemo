@@ -3,11 +3,11 @@
     <item
         android:id="@+id/item_wan"
         android:icon="@drawable/home_shape_tab_wan"
-        android:title="@string/home_wan" />
+        android:title="@string/home_paper" />
     <item
         android:id="@+id/item_daily"
         android:icon="@drawable/home_shape_tab_daily"
-        android:title="@string/home_paper" />
+        android:title="@string/home_wan" />
 <!--    <item-->
 <!--        android:id="@+id/item_discover"-->
 <!--        android:icon="@drawable/home_shape_tab_discover"-->

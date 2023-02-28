@@ -72,6 +72,13 @@ class DailyAdapter(val activity: Activity, val owner: LifecycleOwner): PagingDat
                     setAdapter(BannerImageAdapter(this.context, item?.items!!))
                     addBannerLifecycleObserver(owner)
                     indicator = CircleIndicator(this.context)
+                    setOnBannerListener { _, position ->
+
+                        ARouter.getInstance().build(RouterPath.Video.PATH_PLAYER_Activity)
+                            .withString(Constants.VIDEO_MODE_KEY, toJson(item.items[position].data))
+                            .withBoolean(Constants.VIDEO_IS_FROM_RELATE_KEY, true)
+                            .navigation(activity)
+                    }
                 }
             }
             is HeaderTextViewHolder -> {
