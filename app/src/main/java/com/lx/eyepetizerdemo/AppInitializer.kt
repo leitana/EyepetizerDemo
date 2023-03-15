@@ -4,6 +4,9 @@ import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
 import com.alibaba.android.arouter.launcher.ARouter
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+
 
 /**
  * @title：AppInitializer
@@ -19,6 +22,7 @@ class AppInitializer: Initializer<Unit> {
             ARouter.openDebug()
         }
         ARouter.init(context.applicationContext as Application)
+        Logger.addLogAdapter(AndroidLogAdapter())
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf()

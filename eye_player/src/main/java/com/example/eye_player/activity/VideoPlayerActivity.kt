@@ -3,13 +3,14 @@ package com.example.eye_player.activity
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.transition.Transition
+import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.jzvd.Jzvd
 import cn.jzvd.JzvdStd
@@ -17,6 +18,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.BarUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.eye_player.adapter.TransitionListenerAdapter
 import com.example.eye_player.adapter.VideoRelateAdapter
 import com.example.eye_player.jvzd.JZVDObserver
@@ -26,16 +28,17 @@ import com.example.eye_player.jvzd.ViewMoveHelper
 import com.example.eye_player.viewmodel.VideoPlayerViewModel
 import com.lx.common.Constants
 import com.lx.common.ext.fromJson
+import com.lx.common.ext.toJson
 import com.lx.common.model.Data
+import com.lx.common.model.Item
 import com.lx.common.mvvm.activity.BaseBindVMActivity
 import com.lx.common.router.RouterPath
 import com.lx.eye_player.R
 import com.lx.eye_player.databinding.PlayerActivityVideoBinding
 import com.lx.lib_base.ext.immersionStatusBar
-import com.lx.lib_base.ext.showToast
-import com.lx.lib_base.ext.toastInfo
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+
 
 /**
  * @title：VideoPlayerActivity
@@ -85,7 +88,27 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
                 getRelateVideoList()
             }
         }
-
+        mAdapter.setOnItemClickListener(object : BaseQuickAdapter.OnItemClickListener<Item> {
+            override fun onClick(adapter: BaseQuickAdapter<Item, *>, view: View, position: Int) {
+                if (adapter.getItem(position)?.itemType == VideoRelateAdapter.TYPE_VIDEO) {
+                    ARouter.getInstance().build(RouterPath.Video.PATH_PLAYER_Activity)
+                        .also { postcard ->
+                            view?.let { shareView ->
+                                postcard.withOptionsCompat(
+                                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                        this@VideoPlayerActivity,
+                                        shareView,
+                                        Constants.SHARED_ELEMENT_NAME
+                                    )
+                                )
+                            }
+                        }
+                        .withString(Constants.VIDEO_MODE_KEY, toJson(adapter.getItem(position)!!.data))
+                        .withBoolean(Constants.VIDEO_IS_FROM_RELATE_KEY, false)
+                        .navigation(this@VideoPlayerActivity)
+                }
+            }
+        })
     }
 
     override fun initData() {
@@ -99,8 +122,9 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
         } else {
             addNormalVideoView()
             lifecycle.addObserver(JZVDObserver())
-            if (fromRelate) {
+            if (fromRelate) {//从相关视频Item项点击进入
                 mBinding.smartRefresh.autoRefresh()
+//                initTransition()
             } else {
                 initTransition()
             }
@@ -222,6 +246,7 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
             overridePendingTransition(0, 0)
         }, DURATION)
     }
+
     override fun onBackPressed() {
         if (Jzvd.backPress()) {
             return
@@ -229,7 +254,7 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
         if (isInitViewAttr()) {
             backAnimation()
         } else {
-            super.onBackPressed()
+            finishAfterTransition()
         }
     }
 }

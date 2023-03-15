@@ -20,5 +20,7 @@
         <item name="android:windowBackground">@drawable/launch_layer_list</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 </resources>

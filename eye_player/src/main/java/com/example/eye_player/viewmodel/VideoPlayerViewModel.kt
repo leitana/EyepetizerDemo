@@ -28,10 +28,6 @@ class VideoPlayerViewModel @Inject constructor(
     fun getRelateVideoList(id: Int) = flowEx {
         videoPlayerRepository.getRelateVideoList(id)
     }
-//    suspend fun test(id: Int) {
-//        val data = mVideoPlayerApi.getRelateVideoList(id)
-//        val test = data.itemList
-//    }
 
     //移除最新的，并返回当前最前的数据
     fun removeVideoModel(): Data?{

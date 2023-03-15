@@ -15,6 +15,7 @@ import com.lx.common.router.RouterPath
 import com.lx.eye_home.databinding.HomeActivityBinding
 import com.lx.lib_base.ext.immersionStatusBar
 import com.lx.lib_base.ext.toastInfo
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
 import javax.inject.Inject
