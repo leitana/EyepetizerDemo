@@ -18,6 +18,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.BarUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.eye_player.adapter.TransitionListenerAdapter
 import com.example.eye_player.adapter.VideoRelateAdapter
@@ -33,9 +34,12 @@ import com.lx.common.model.Data
 import com.lx.common.model.Item
 import com.lx.common.mvvm.activity.BaseBindVMActivity
 import com.lx.common.router.RouterPath
+import com.lx.common.utils.DataStoreUtils
 import com.lx.eye_player.R
 import com.lx.eye_player.databinding.PlayerActivityVideoBinding
 import com.lx.lib_base.ext.immersionStatusBar
+import com.lx.lib_base.ext.showToast
+import com.lx.lib_base.ext.toastInfo
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -129,6 +133,8 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
                 initTransition()
             }
         }
+        showToast(DataStoreUtils.getSyncData("flag",""))
+//        toastInfo(DataStoreUtils.getSyncData("flag",""))
     }
 
     override fun startObserve() {
@@ -204,7 +210,6 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
     }
 
     private fun getRelateVideoList(){
-//        toastInfo(mViewModel.test().toString())
         mViewModel.getRelateVideoList(videoModel.id).observe(this) {
             mAdapter.submitList(it)
         }

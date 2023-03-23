@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.eye_daily.adapter.DailyAdapter
 import com.example.eye_daily.viewmodel.DailyViewModel
+import com.lx.common.ext.dataStore
 import com.lx.common.mvvm.fragment.BaseVMFragment
 import com.lx.common.router.RouterPath
 import com.lx.common.ui.adapter.FooterAdapter
+import com.lx.common.utils.DataStoreUtils
 import com.lx.eye_daily.R
 import com.lx.eye_daily.databinding.DailyFragmentListBinding
 import com.lx.lib_base.ext.toastError
@@ -49,6 +51,7 @@ class DailyFragment: BaseVMFragment<DailyViewModel, DailyFragmentListBinding>() 
                 mAdapter.submitData(pagingData)
             }
         }
+        DataStoreUtils.putSyncData("flag", "1111")
     }
 
     private fun addLoadStateListener(){

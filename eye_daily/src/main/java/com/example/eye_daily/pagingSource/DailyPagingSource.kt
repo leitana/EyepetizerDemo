@@ -2,11 +2,13 @@ package com.example.eye_daily.pagingSource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.blankj.utilcode.util.ToastUtils
 import com.example.eye_daily.api.DailyApi
 import com.example.eye_daily.constant.Constant
 import com.example.eye_daily.di.DailyUrlManage
 import com.example.eye_daily.model.ProviderMultiModel
 import com.lx.common.model.Item
+import com.lx.lib_base.ext.toastError
 
 /**
  * @title：DailyPagingSource
@@ -56,6 +58,7 @@ class DailyPagingSource(val dailyApi: DailyApi, val dailyUrlManager: DailyUrlMan
             nextKey?.let { dailyUrlManager.setDailyUrl(it) }
             LoadResult.Page(providerMultiModels, prevKey, nextKey)
         } catch(e: Exception) {
+            e.message?.let { toastError(it) }
             LoadResult.Error(e)
         }
     }
