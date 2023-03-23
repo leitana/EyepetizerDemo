@@ -133,7 +133,7 @@ class VideoPlayerActivity: BaseBindVMActivity<VideoPlayerViewModel, PlayerActivi
                 initTransition()
             }
         }
-        showToast(DataStoreUtils.getSyncData("flag",""))
+//        showToast(DataStoreUtils.getSyncData("flag",""))
 //        toastInfo(DataStoreUtils.getSyncData("flag",""))
     }
 

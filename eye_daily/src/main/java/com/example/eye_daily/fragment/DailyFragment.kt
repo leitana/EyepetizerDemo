@@ -51,7 +51,7 @@ class DailyFragment: BaseVMFragment<DailyViewModel, DailyFragmentListBinding>() 
                 mAdapter.submitData(pagingData)
             }
         }
-        DataStoreUtils.putSyncData("flag", "1111")
+//        DataStoreUtils.putSyncData("flag", "1111")
     }
 
     private fun addLoadStateListener(){
